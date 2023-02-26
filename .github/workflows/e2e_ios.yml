@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install npm Dependencies
+      - name: Install yarn Dependencies
         run: yarn install
 
       - name: Install Pod Dependencies
@@ -28,6 +28,9 @@ jobs:
         run: |
           brew tap wix/brew
           brew install applesimutils
+
+      - name: Generate ios folder
+        run: yarn expo prebuild --platform ios
 
       - name: Run Detox Build
         run: yarn run iosDebugBuild
