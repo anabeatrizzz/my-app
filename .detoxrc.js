@@ -45,15 +45,13 @@ module.exports = {
       type: 'android.attached',
       device: {
         adbName: 'ZF5233V9VF'
-      },
-      forceAdbInstall: true
+      }
     },
     emulator: {
       type: 'android.emulator',
       device: {
         avdName: 'Pixel_3a_API_33_x86_64'
-      },
-      forceAdbInstall: true
+      }
     }
   },
   configurations: {
