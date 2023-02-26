@@ -10,6 +10,6 @@ module.exports = {
   testEnvironment: 'detox/runners/jest/testEnvironment',
   verbose: true,
   detectOpenHandles: true,
-  runInBand: true,
+  //runInBand: true,
   forceExit: true
 };
