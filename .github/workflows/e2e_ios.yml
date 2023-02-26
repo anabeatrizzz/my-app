@@ -21,6 +21,9 @@ jobs:
       - name: Install yarn Dependencies
         run: yarn install
 
+      - name: Generate ios folder
+        run: yarn expo prebuild --platform ios
+
       - name: Install Pod Dependencies
         run: cd ./ios && pod install && cd ..
 
@@ -28,9 +31,6 @@ jobs:
         run: |
           brew tap wix/brew
           brew install applesimutils
-
-      - name: Generate ios folder
-        run: yarn expo prebuild --platform ios
 
       - name: Run Detox Build
         run: yarn run iosDebugBuild
