@@ -11,21 +11,45 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 
       - name: Install Node
         uses: actions/setup-node@v1
         with:
           node-version: '18'
+      
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Rebuild detox
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: yarn detox clean-framework-cache && yarn detox build-framework-cache
 
       - name: Install yarn Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Generate ios folder
         run: yarn expo prebuild --platform ios
 
-      - name: Install Pod Dependencies
-        run: cd ./ios && pod install && cd ..
+      - name: Cache Pods
+        uses: actions/cache@v1
+        id: podcache
+        with:
+          path: ios/Pods
+          key: pods-${{ hashFiles('**/Podfile.lock') }}
+
+      - name: Update Pods
+        run: |
+          gem update cocoapods xcodeproj
+          cd ios && pod install && cd ..
 
       - name: Install Detox Dependencies
         run: |
@@ -33,13 +57,13 @@ jobs:
           brew install applesimutils
 
       - name: Run Detox Build
-        run: yarn run iosDebugBuild
+        run: yarn run iosReleaseBuild
 
       - name: Run Detox Test(s)
         run: |
           yarn react-native start &
           METRO_BUNDLER_PID=$!
-          yarn run iosE2E
+          yarn run iosReleaseE2E
           DETOX_EXIT_CODE=$?
           kill $METRO_BUNDLER_PID
           exit $DETOX_EXIT_CODE
