@@ -60,10 +60,4 @@ jobs:
         run: yarn run iosReleaseBuild
 
       - name: Run Detox Test(s)
-        run: |
-          yarn react-native start &
-          METRO_BUNDLER_PID=$!
-          yarn run iosReleaseE2E
-          DETOX_EXIT_CODE=$?
-          kill $METRO_BUNDLER_PID
-          exit $DETOX_EXIT_CODE
+        run: yarn run iosReleaseE2E
