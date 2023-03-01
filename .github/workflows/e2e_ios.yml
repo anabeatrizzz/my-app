@@ -13,48 +13,55 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
 
       - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: '18'
       
-      - name: Cache node modules
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Yarn dependencies
+        run: yarn --frozen-lockfile --prefer-offline
 
-      - name: Rebuild detox
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: yarn detox clean-framework-cache && yarn detox build-framework-cache
-
-      - name: Install yarn Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-
-      - name: Generate ios folder
-        run: yarn expo prebuild --platform ios
-
-      - name: Cache Pods
-        uses: actions/cache@v1
-        id: podcache
-        with:
-          path: ios/Pods
-          key: pods-${{ hashFiles('**/Podfile.lock') }}
-
-      - name: Update Pods
-        run: |
-          gem update cocoapods xcodeproj
-          cd ios && pod install && cd ..
-
-      - name: Install Detox Dependencies
+      - name: Install macOS Dependencies
         run: |
           brew tap wix/brew
           brew install applesimutils
+        env:
+            HOMEBREW_NO_AUTO_UPDATE: 1
+            HOMEBREW_NO_INSTALL_CLEANUP: 1
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v3
+        id: cache-cocoapods
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install CocoaPods
+        if: steps.cache-cocoapods.outputs.cache-hit != 'true'
+        run: cd ios ; pod install ; cd -
+
+      - name: Detox rebuild framework cache
+        run: yarn detox rebuild-framework-cache
+
+      - name: Cache Detox build
+        id: cache-detox-build
+        uses: actions/cache@v3
+        with:
+          path: ios/build
+          key: ${{ runner.os }}-detox-build
+          restore-keys: |
+            ${{ runner.os }}-detox-build
+
+      - name: Generate ios folder
+        run: yarn expo prebuild --platform ios
 
       - name: Run Detox Build
         run: yarn run iosReleaseBuild

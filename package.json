@@ -16,7 +16,7 @@
     "iosDebugE2E": "detox test -c ios.sim.debug",
     "androidDebugE2E": "detox test -c android.emu.debug",
 
-    "iosReleaseE2E": "detox test -c ios.sim.release --cleanup",
+    "iosReleaseE2E": "detox test -c ios.sim.release --cleanup --headless",
     "androidReleaseE2E": "detox test -c android.emu.release",
     
     "androidAttDebugBuild": "detox build -c android.att.debug",
