@@ -39,6 +39,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
 
+      - name: Generate ios folder
+        run: yarn expo prebuild --platform ios
+
       - name: Install CocoaPods
         if: steps.cache-cocoapods.outputs.cache-hit != 'true'
         run: cd ios ; pod install ; cd -
@@ -54,10 +57,7 @@ jobs:
           key: ${{ runner.os }}-detox-build
           restore-keys: |
             ${{ runner.os }}-detox-build
-
-      - name: Generate ios folder
-        run: yarn expo prebuild --platform ios
-
+            
       - name: Run Detox Build
         run: yarn run iosReleaseBuild
 
