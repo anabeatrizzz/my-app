@@ -63,3 +63,10 @@ jobs:
 
       - name: Run Detox Test(s)
         run: yarn run iosReleaseE2E
+
+      - name: Upload artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: detox-artifacts
+          path: artifacts
