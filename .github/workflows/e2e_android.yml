@@ -9,8 +9,8 @@ jobs:
   build:
     name: E2E (Android)
     runs-on: macOS-latest
-    #env:
-      #DETOX_CONFIGURATION: android.emu.release
+    env:
+      DETOX_CONFIGURATION: android.emu.release
 
     steps:
       - name: Checkout
@@ -24,6 +24,9 @@ jobs:
       - name: Install Yarn dependencies
         run: yarn --frozen-lockfile --prefer-offline
 
+      - name: Generate android folder
+        run: yarn expo prebuild --platform android
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -31,12 +34,6 @@ jobs:
           distribution: temurin
           java-version: 17
       
-      - name: Generate android folder
-        run: yarn expo prebuild --platform android
-
-      - name: Detox rebuild framework cache
-        run: yarn detox rebuild-framework-cache
-
       - name: Cache Detox build
         id: cache-detox-build
         uses: actions/cache@v3
@@ -54,7 +51,7 @@ jobs:
           sed -i '' 's/android {/android { testBuildType "release"/' android/app/build.gradle
 
       - name: Detox build
-        run: yarn run androidReleaseBuild
+        run: yarn detox build -c ${{ env.DETOX_CONFIGURATION }}
 
       - name: Get device name
         id: device
@@ -67,7 +64,7 @@ jobs:
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           profile: pixel
-          script: yarn run androidReleaseE2E
+          script: yarn detox test -c ${{ env.DETOX_CONFIGURATION }} --cleanup --headless --record-logs all
 
       - name: Upload artifacts
         if: failure()
