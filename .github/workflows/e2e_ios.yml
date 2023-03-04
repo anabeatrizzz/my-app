@@ -75,4 +75,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: tests-report
-          path: ../e2e/report.html
+          path: /Users/runner/work/my-app/my-app/e2e/report.html
