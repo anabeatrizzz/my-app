@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: E2E (iOS)
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
 
     steps:
       - name: Checkout
