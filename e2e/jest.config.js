@@ -6,7 +6,16 @@ module.exports = {
   maxWorkers: 1,
   globalSetup: 'detox/runners/jest/globalSetup',
   globalTeardown: 'detox/runners/jest/globalTeardown',
-  reporters: ['detox/runners/jest/reporter'],
+  reporters: [
+    'detox/runners/jest/reporter',
+    [
+      'jest-html-reporters', {
+        "publicPath": "./e2e",
+        "filename": "report.html",
+        "inlineSource": true
+      }
+    ]
+  ],
   testEnvironment: 'detox/runners/jest/testEnvironment',
   verbose: true,
   detectOpenHandles: true,

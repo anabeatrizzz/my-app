@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: E2E (iOS)
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -64,9 +64,15 @@ jobs:
       - name: Run Detox Test(s)
         run: yarn run iosReleaseE2E
 
-      - name: Upload artifacts
+      - name: Upload Detox artifacts
         if: failure()
         uses: actions/upload-artifact@v3
         with:
           name: detox-artifacts
           path: artifacts
+
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: tests-report
+          path: ../e2e/report.html
