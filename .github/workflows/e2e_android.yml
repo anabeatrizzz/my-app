@@ -43,13 +43,6 @@ jobs:
           avd-name: Pixel_3_API_31
           arch: x86_64
           script: yarn run androidReleaseE2E
-          #script: |
-          #  yarn react-native start &
-          #  METRO_BUNDLER_PID=$!
-          #  yarn run androidReleaseE2E
-          #  DETOX_EXIT_CODE=$?
-          #  kill $METRO_BUNDLER_PID
-          #  exit $DETOX_EXIT_CODE
             
       - name: Upload Detox artifacts
         if: failure()

@@ -14,7 +14,7 @@
     "iosDebugE2EHeadless": "detox test -c ios.sim.debug --headless",
     "androidDebugE2E": "detox test -c android.emu.debug",
     "iosReleaseE2E": "detox test -c ios.sim.release --cleanup --headless --record-logs all",
-    "androidReleaseE2E": "detox test -c android.emu.release --cleanup --headless --record-logs all",
+    "androidReleaseE2E": "detox test -c android.emu.release --record-logs all",
     "androidAttDebugBuild": "detox build -c android.att.debug",
     "androidAttE2E": "detox test -c android.att.debug",
     "iosE2EReuse": "detox test -c ios.sim.debug --reuse",
