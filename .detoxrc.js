@@ -23,7 +23,7 @@ module.exports = {
     'android.debug': {
       type: 'android.apk',
       binaryPath: 'android/app/build/outputs/apk/debug/app-debug.apk',
-      build: 'cd android ; ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug ; cd -',
+      build: 'cd android ; ./gradlew assembleDebug ; ./gradlew assembleAndroidTest -DtestBuildType=debug ; cd -',
       reversePorts: [
         8081
       ]
@@ -31,7 +31,8 @@ module.exports = {
     'android.release': {
       type: 'android.apk',
       binaryPath: 'android/app/build/outputs/apk/release/app-release.apk',
-      build: 'cd android ; ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release ; cd -'
+      testBinaryPath: 'android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk',
+      build: 'cd android ; ./gradlew assembleRelease ; ./gradlew assembleAndroidTest -DtestBuildType=release ; cd -'
     }
   },
   devices: {
@@ -50,7 +51,7 @@ module.exports = {
     emulator: {
       type: 'android.emulator',
       device: {
-        avdName: 'Pixel_3a_API_33_x86_64'
+        avdName: 'Pixel_3_API_31'
       }
     }
   },
