@@ -9,6 +9,9 @@ jobs:
   build:
     name: E2E (Android)
     runs-on: macos-latest
+    concurrency:
+      group: android-e2e-${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
