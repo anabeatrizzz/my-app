@@ -29,7 +29,7 @@
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
     "react-native-web": "~0.18.9",
-    "sharp-cli": "^4.1.0"
+    "sharp-cli": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
