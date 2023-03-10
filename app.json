@@ -31,10 +31,8 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "expo": {
-      "plugins": [
-        "@config-plugins/detox"
-      ]
-    }
+    "plugins": [
+      "@config-plugins/detox"
+    ]
   }
 }
