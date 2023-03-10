@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: E2E (Android)
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
       - name: Checkout
@@ -22,7 +22,7 @@ jobs:
       - name: Install Yarn dependencies
         run: yarn --frozen-lockfile --prefer-offline
 
-     - name: Setup Java
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
           cache: gradle
