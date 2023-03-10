@@ -1,0 +1,1 @@
+Detox tests on a new brand Expo project using GitHub Actions
