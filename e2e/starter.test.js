@@ -1,6 +1,10 @@
 describe('Example', () => {
   beforeAll(async () => {
-    await device.launchApp();
+    await device.launchApp({
+      permissions: {
+        location: 'always'
+      }
+    });
   });
 
   beforeEach(async () => {

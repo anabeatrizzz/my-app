@@ -13,7 +13,8 @@ module.exports = {
     'ios.debug': {
       type: 'ios.app',
       binaryPath: 'ios/build/Build/Products/Debug-iphonesimulator/myapp.app',
-      build: 'xcodebuild -workspace ios/myapp.xcworkspace -scheme myapp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build'
+      build: 'xcodebuild -workspace ios/myapp.xcworkspace -scheme myapp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build',
+      start: "yarn react-native start"
     },
     'ios.release': {
       type: 'ios.app',
@@ -26,7 +27,8 @@ module.exports = {
       build: 'cd android ; ./gradlew assembleDebug ; ./gradlew assembleAndroidTest -DtestBuildType=debug ; cd -',
       reversePorts: [
         8081
-      ]
+      ],
+      start: "yarn react-native start"
     },
     'android.release': {
       type: 'android.apk',
