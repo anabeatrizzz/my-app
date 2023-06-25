@@ -14,17 +14,20 @@
     "iosDebugE2EHeadless": "detox test -c ios.sim.debug --headless",
     "androidDebugE2E": "detox test -c android.emu.debug",
     "iosReleaseE2E": "detox test -c ios.sim.release --cleanup --headless --record-logs all",
-    "androidReleaseE2E": "detox test -c android.emu.release --headless --record-logs all"
+    "androidReleaseE2E": "detox test -c android.emu.release --headless --record-logs all",
+    "eas-build-pre-install": "./eas-hooks/eas-build-pre-install.sh",
+    "eas-build-on-success": "./eas-hooks/eas-build-on-success.sh"
   },
   "dependencies": {
     "expo": "~48.0.6",
     "expo-dev-client": "~2.2.1",
-    "expo-splash-screen": "~0.18.1",
+    "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "expo-system-ui": "~2.2.1",
+    "expo-updates": "~0.16.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.71.3",
+    "react-native": "0.71.8",
     "react-native-web": "~0.18.11"
   },
   "devDependencies": {

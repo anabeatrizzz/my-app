@@ -9,12 +9,20 @@ module.exports = {
       setupTimeout: 300000
     }
   },
+  artifacts: {
+    plugins: {
+      log: {
+        enabled: true,
+        keepOnlyFailedTestsArtifacts: false
+      }
+    }
+  },
   apps: {
     'ios.debug': {
       type: 'ios.app',
       binaryPath: 'ios/build/Build/Products/Debug-iphonesimulator/myapp.app',
       build: 'xcodebuild -workspace ios/myapp.xcworkspace -scheme myapp -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build',
-      start: "yarn react-native start"
+      //start: "yarn react-native start"
     },
     'ios.release': {
       type: 'ios.app',
@@ -28,7 +36,7 @@ module.exports = {
       reversePorts: [
         8081
       ],
-      start: "yarn react-native start"
+      //start: "yarn react-native start"
     },
     'android.release': {
       type: 'android.apk',
@@ -53,7 +61,7 @@ module.exports = {
     emulator: {
       type: 'android.emulator',
       device: {
-        avdName: 'Pixel_3_API_31'
+        avdName: 'pixel_4'
       }
     }
   },
