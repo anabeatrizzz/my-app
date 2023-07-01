@@ -61,7 +61,7 @@ module.exports = {
     emulator: {
       type: 'android.emulator',
       device: {
-        avdName: 'pixel_4'
+        avdName: process.env.RUN_MODE === 'debug' ? "Pixel_3_API_31" : 'pixel_4'
       }
     }
   },

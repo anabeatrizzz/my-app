@@ -33,7 +33,13 @@ if [[ "$EAS_BUILD_PLATFORM" == "android" ]]; then
     counter=$((counter + 1))
   done
 
-
+  # Build Android APK
+  if [[ "$EAS_BUILD_PROFILE" == "test" ]]; then
+    detox test -c android.emu.release
+  fi
+  if [[ "$EAS_BUILD_PROFILE" == "test_debug" ]]; then
+    detox test -c android.emu.debug
+  fi
   # Execute Android tests
   if [[ "$EAS_BUILD_PROFILE" == "test" ]]; then
     detox test -c android.emu.release --headless
@@ -42,6 +48,14 @@ if [[ "$EAS_BUILD_PLATFORM" == "android" ]]; then
     detox test -c android.emu.debug --headless
   fi
 else
+  # Build iOS IPA
+  if [[  "$EAS_BUILD_PROFILE" == "test" ]]; then
+    detox build -c ios.sim.release
+  fi
+  if [[ "$EAS_BUILD_PROFILE" == "test_debug" ]]; then
+    detox build -c ios.sim.debug
+  fi
+
   # Execute iOS tests
   if [[  "$EAS_BUILD_PROFILE" == "test" ]]; then
     detox test -c ios.sim.release --cleanup --headless

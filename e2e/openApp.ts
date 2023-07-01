@@ -2,7 +2,6 @@
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable no-return-await */
 import { device } from 'detox';
-import { resolveConfig } from "detox/internals"
 import appConfig from "../app.json"
 
 const platform = device.getPlatform();
@@ -12,9 +11,8 @@ const permissions: Detox.DevicePermissions = {
 }
 
 export default async function openApp() {
-  const config = await resolveConfig();
   // @ts-ignore
-  if (config.configurationName.split('.')[1] === 'debug') {
+  if (process.env.RUN_MODE === 'debug') {
     return await openAppForDebugBuild(platform);
   }
   return await device.launchApp({
@@ -24,7 +22,7 @@ export default async function openApp() {
 }
 
 async function openAppForDebugBuild(platform: 'ios' | 'android') {
-  // const deepLinkUrl = getDeepLinkUrl(getDevLauncherPackagerUrl(platform));
+  //const deepLinkUrl = getDeepLinkUrl(getDevLauncherPackagerUrl(platform));
   const deepLinkUrl = process.env.EXPO_USE_UPDATES
     ? // Testing latest published EAS update for the test_debug channel
       getDeepLinkUrl(getLatestUpdateUrl())

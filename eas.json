@@ -11,6 +11,7 @@
       "buildArtifactPaths": ["artifacts/**/*.png"]
     },
     "test_debug": {
+      "developmentClient": true,
       "android": {
         "gradleCommand": ":app:assembleDebug :app:assembleAndroidTest -DtestBuildType=debug",
         "withoutCredentials": true
