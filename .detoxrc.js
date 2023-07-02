@@ -9,14 +9,14 @@ module.exports = {
       setupTimeout: 300000
     }
   },
-  artifacts: {
+  /*artifacts: {
     plugins: {
       log: {
         enabled: true,
         keepOnlyFailedTestsArtifacts: false
       }
     }
-  },
+  },*/
   apps: {
     'ios.debug': {
       type: 'ios.app',

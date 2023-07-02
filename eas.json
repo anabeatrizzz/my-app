@@ -8,7 +8,7 @@
       "ios": {
         "simulator": true
       },
-      "buildArtifactPaths": ["artifacts/**/*.png"]
+      "buildArtifactPaths": ["e2e/report.html"]
     },
     "test_debug": {
       "developmentClient": true,
@@ -20,6 +20,7 @@
         "buildConfiguration": "Debug",
         "simulator": true
       },
+      "buildArtifactPaths": ["e2e/report.html"],
       "env": {
         "EXPO_USE_UPDATES": "1"
       },
