@@ -3,7 +3,7 @@ name: E2E (Android)
 on:
   push:
     branches:
-      - '02-26-DetoxTests'
+      - '06-25-ConfigureExpoDevClient'
 
 jobs:
   build:
