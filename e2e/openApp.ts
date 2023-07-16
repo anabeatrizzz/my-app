@@ -23,6 +23,7 @@ export default async function openApp() {
 
 async function openAppForDebugBuild(platform: 'ios' | 'android') {
   //const deepLinkUrl = getDeepLinkUrl(getDevLauncherPackagerUrl(platform));
+  // @ts-ignore
   const deepLinkUrl = process.env.EXPO_USE_UPDATES
     ? // Testing latest published EAS update for the test_debug channel
       getDeepLinkUrl(getLatestUpdateUrl())

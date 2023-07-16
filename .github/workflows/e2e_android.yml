@@ -42,7 +42,8 @@ jobs:
         run: yarn expo prebuild --platform android
         
       - name: Detox build
-        run: yarn run androidReleaseBuild
+        # run: yarn run androidReleaseBuild
+        run: yarn run androidDebugBuild
 
       - name: Run Detox Test(s)
         uses: reactivecircus/android-emulator-runner@v2
@@ -50,7 +51,8 @@ jobs:
           api-level: 31
           avd-name: Pixel_3_API_31
           arch: x86_64
-          script: yarn run androidReleaseE2E
+          # script: yarn run androidReleaseE2E
+          script: RUN_MODE=debug detox test -c android.emu.debug
             
       - name: Upload Detox artifacts
         if: failure()
