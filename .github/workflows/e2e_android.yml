@@ -52,7 +52,7 @@ jobs:
           avd-name: Pixel_3_API_31
           arch: x86_64
           # script: yarn run androidReleaseE2E
-          script: RUN_MODE=debug detox test -c android.emu.debug
+          script: yarn run androidRunModeDebug
             
       - name: Upload Detox artifacts
         if: failure()
