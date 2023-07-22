@@ -3,7 +3,7 @@ name: E2E (iOS)
 on:
   push:
     branches:
-      - '02-26-DetoxTests'
+      - '06-25-ConfigureExpoDevClient'
 
 jobs:
   build:
@@ -59,10 +59,10 @@ jobs:
             ${{ runner.os }}-detox-build
             
       - name: Run Detox Build
-        run: yarn run iosReleaseBuild
+        run: yarn run iosDebugBuild
 
       - name: Run Detox Test(s)
-        run: yarn run iosReleaseE2E
+        run: yarn run iosRunModeDebug
 
       - name: Upload Detox artifacts
         if: failure()

@@ -41,8 +41,7 @@ jobs:
       - name: Generate android folder
         run: yarn expo prebuild --platform android
         
-      - name: Detox build
-        # run: yarn run androidReleaseBuild
+      - name: Run Detox Build
         run: yarn run androidDebugBuild
 
       - name: Run Detox Test(s)
@@ -51,7 +50,6 @@ jobs:
           api-level: 31
           avd-name: Pixel_3_API_31
           arch: x86_64
-          # script: yarn run androidReleaseE2E
           script: yarn run androidRunModeDebug
             
       - name: Upload Detox artifacts
